@@ -18,11 +18,15 @@ Welcome! I'm Jim, a cybersecurity enthusiast passionate about Linux, ethical hac
 - GRC frameworks (via training & certifications)
 
 ## 📁 Folder Structure
-/linux-hacks.md → Tips, command usage & tricks  
+/linux-fundamentals.md → Tips, command usage & tricks  
 /htb-writeups/ → Hack The Box walkthroughs  
 /overthewire/ → Bandit and other CTF levels  
 /bash-scripts/ → Scripts like Nmap automation or permission fixers  
 
----
+## 📁 Linux Fundamentals
+
+- [Linux Hacks & Commands](linux-fundamentals/linux-hacks.md)
+- [System Info & Enumeration](linux-fundamentals/system-info.md)
+
 
 Stay tuned for regular updates as I learn, break, and build my way into the cybersecurity field 💻🔒
