@@ -1,217 +1,176 @@
-📂  Viewing & Filtering File Contents
-Linux offers several command-line tools that help you inspect files, extract useful data, and transform the output for better understanding. These tools are especially useful for sysadmins, developers, and hackers.
+ 📂 Viewing and Filtering File Contents in Linux
 
-📄 1. Viewing File Contents
-🔹 more
-What it does: Displays file content one page at a time (when file is long).
+In Linux, there are several essential commands for inspecting, analyzing, and filtering the contents of files. These tools are incredibly useful when working with configuration files, system logs, and outputs from various processes.
 
-bash
-Copy
-Edit
-cat /etc/passwd | more
-cat: Outputs the entire file.
+This section provides a hands-on guide with examples and output to help you understand how each command works and what the results mean.
 
-| more: Pauses every screenful so you can read line-by-line.
+---
 
-Example Output:
+## 📄 1. Viewing File Contents
+
+### 🔹 `cat` – View entire file contents
+```bash
+cat /etc/passwd
+Output:
 
 ruby
-Copy
-Edit
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+...
+Shows the full contents of the file. Often used to quickly read small files.
+
+🔹 more – View file one page at a time
+bash
+cat /etc/passwd | more
+Output:
+
+ruby
+
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 --More--
-🔹 less
-What it does: Similar to more, but more powerful. Lets you scroll up/down freely.
+Pauses after each page. Use Enter/Space to scroll and q to quit.
 
+🔹 less – Scrollable file viewer
 bash
-Copy
-Edit
+
 less /etc/passwd
-Opens file in a scrollable view.
+Interactive file viewer. Use ↑ ↓ or PgUp/PgDn to navigate, and press q to quit.
 
-Press q to quit.
-
-Example Output: Same as more, but scrollable interactively.
-
-🔝🔚 2. Show Start or End of a File
-🔹 head
-What it does: Shows the first 10 lines of a file.
-
+🔝🔚 2. Display Start or End of a File
+🔹 head – Show beginning lines
 bash
-Copy
-Edit
 head /etc/passwd
 Output:
 
 ruby
-Copy
-Edit
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 ...
-🔹 tail
-What it does: Shows the last 10 lines of a file.
+Displays the first 10 lines by default. Use -n to set a custom number.
 
-bash
-Copy
-Edit
+🔹 tail – Show end lines
+
 tail /etc/passwd
 Output:
 
 ruby
-Copy
-Edit
 systemd-resolve:x:102:103:systemd Resolver:/run/systemd/resolve:/usr/sbin/nologin
 user:x:1000:1000:user:/home/user:/bin/bash
-🔍 3. Filtering & Searching Content
-🔹 grep
-What it does: Searches for lines that match a pattern.
+Useful for checking recent log entries or the last few users.
 
-bash
-Copy
-Edit
-cat /etc/passwd | grep "/bin/bash"
-Finds users whose login shell is /bin/bash.
+🔍 3. Filtering and Searching
+🔹 grep – Search for matching lines
 
+grep "/bin/bash" /etc/passwd
 Output:
 
 ruby
-Copy
-Edit
+
 root:x:0:0:root:/root:/bin/bash
 user:x:1000:1000:user:/home/user:/bin/bash
-🔹 grep -v
-What it does: Shows lines that do NOT match the pattern.
+Finds lines that contain /bin/bash.
 
-bash
-Copy
-Edit
-cat /etc/passwd | grep -v "nologin"
-Excludes system accounts without real login access.
+🔹 grep -v – Exclude matching lines
 
+grep -v "nologin" /etc/passwd
 Output:
 
-ruby
-Copy
-Edit
+
 root:x:0:0:root:/root:/bin/bash
 user:x:1000:1000:user:/home/user:/bin/bash
-✂️ 4. Extracting Specific Fields
-🔹 cut
-What it does: Splits each line and shows specific fields.
+Returns lines that do not contain nologin.
 
-bash
-Copy
-Edit
-cat /etc/passwd | cut -d ":" -f1
--d ":": Use : as a separator.
+✂️ 4. Extracting Fields
+🔹 cut – Extract specific fields
 
--f1: Show first field (username).
-
+cut -d ":" -f1 /etc/passwd
 Output:
 
-python
+python-repl
 Copy
 Edit
 root
 daemon
 bin
-🔁 5. Replacing Characters
-🔹 tr
-What it does: Translates or replaces characters.
+sys
+...
+-d ":" tells it to use : as a delimiter, and -f1 selects the first field — the username.
 
-bash
-Copy
-Edit
+🔁 5. Replace Characters
+🔹 tr – Translate or delete characters
+
 cat /etc/passwd | tr ":" " "
-Replaces colons (:) with spaces.
-
 Output:
 
-bash
-Copy
-Edit
-root x 0 0 root /root /bin/bash
-📊 6. Formatting as a Table
-🔹 column
-What it does: Aligns text into neat columns.
 
-bash
-Copy
-Edit
+root x 0 0 root /root /bin/bash
+daemon x 1 1 daemon /usr/sbin /usr/sbin/nologin
+...
+Replaces : with a space. Useful for formatting.
+
+📊 6. Formatting Output
+🔹 column – Align into neat columns
+
 cat /etc/passwd | tr ":" " " | column -t
 Output:
 
-bash
-Copy
-Edit
-root   x  0    0    root   /root           /bin/bash
-daemon x  1    1    daemon /usr/sbin       /usr/sbin/nologin
+
+root    x  0  0  root    /root             /bin/bash
+daemon  x  1  1  daemon  /usr/sbin         /usr/sbin/nologin
+...
+Helps improve readability of structured text.
+
 🧠 7. Smart Field Extraction
-🔹 awk
-What it does: Prints selected columns from input.
+🔹 awk – Scan and extract by pattern
 
-bash
-Copy
-Edit
-cat /etc/passwd | tr ":" " " | awk '{print $1, $NF}'
-$1: First field (username)
-
-$NF: Last field (login shell)
-
+cat /etc/passwd | awk -F ":" '{print $1, $7}'
 Output:
 
-bash
-Copy
-Edit
+
 root /bin/bash
 daemon /usr/sbin/nologin
-🧪 8. Search and Replace Text
-🔹 sed
-What it does: Finds and replaces text in each line.
+...
+-F ":" sets the field delimiter.
 
-bash
-Copy
-Edit
-cat /etc/passwd | tr ":" " " | sed 's/bash/HTBshell/g'
-Replaces bash with HTBshell.
+$1 is the first field (username), $7 is the seventh (shell path).
 
+🧪 8. Text Substitution
+🔹 sed – Search and replace
+
+cat /etc/passwd | sed 's/bash/HTBshell/g'
 Output:
 
-bash
-Copy
-Edit
-root x 0 0 root /root /bin/HTBshell
-🔢 9. Counting Output
-🔹 wc
-What it does: Counts lines, words, or characters.
 
-bash
-Copy
-Edit
-cat /etc/passwd | grep "/bin/bash" | wc -l
-wc -l: Counts the number of lines.
+root:x:0:0:root:/root:/bin/HTBshell
+...
+Replaces bash with HTBshell globally in each line.
 
-Useful for counting users with /bin/bash login shell.
+🔢 9. Counting Results
+🔹 wc – Word, line, character count
 
+grep "/bin/bash" /etc/passwd | wc -l
 Output:
 
-Copy
-Edit
+
 2
-✅ Summary Table
-Tool	Use Case	Example Use
-cat	Show full file	cat /etc/passwd
-more	Paginate long files	`cat file.txt
-less	Advanced paging	less file.txt
-head	Show first N lines	head /var/log/syslog
-tail	Show last N lines	tail -n 20 /var/log/syslog
-grep	Find matching lines	grep 'error' file.txt
-cut	Extract columns	cut -d ":" -f1 file.txt
-tr	Replace characters	tr ':' ' '
-column	Format output into table	`...
-awk	Print specific fields	awk '{print $1, $NF}'
-sed	Search and replace	sed 's/old/new/g'
-wc	Count lines, words, characters	wc -l
+Tells you how many lines (users) match /bin/bash.
+
+📋 Summary Table
+Command	Purpose	Example
+cat	View full file	cat /etc/passwd
+more	Paginate output	`cat file
+less	Scroll file interactively	less file
+head	View top lines	head -n 10 file
+tail	View last lines	tail -n 10 file
+grep	Search for patterns	grep 'bash' /etc/passwd
+cut	Extract columns by delimiter	cut -d ':' -f1 file
+tr	Replace characters	tr ':' ' ' file
+column	Align fields into columns	`...
+awk	Extract & format fields	awk -F ':' '{print $1, $7}' file
+sed	Replace content on the fly	sed 's/bash/zsh/g' file
+wc	Count lines, words, chars	wc -l file
+
+
 
