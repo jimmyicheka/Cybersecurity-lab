@@ -1,0 +1,96 @@
+# 🖥️ Dual-Adapter Exploitation Lab (Kali + Windows)
+
+This lab demonstrates how to set up a **dual-network VirtualBox environment** for **penetration testing and privilege escalation practice**.  
+
+By using **two network adapters**, we achieve:
+
+- **Internet access** (via NAT) for downloading tools and updates  
+- **Isolated internal network** (via Host-Only) for safe exploitation without risking the host machine  
+
+This setup simulates a **real attacker scenario**, where an attacker has:  
+1. Internet connectivity to update and install hacking tools  
+2. Direct access to a target machine on an isolated subnet  
+
+---
+
+## ⚙️ Network Configuration
+
+| Machine        | Adapter 1 (NAT)    | Adapter 2 (Host-Only) |
+|----------------|-------------------|-----------------------|
+| **Kali Linux** | 10.0.2.15 (eth0)  | 192.168.56.102 (eth1) |
+| **Windows**    | 10.0.2.15 (eth0)  | 192.168.56.103 (eth1) |
+
+**Roles:**  
+- **eth0 / NAT:** Internet access only  
+- **eth1 / Host-Only:** Exploitation network (VM-to-VM communication)
+
+---
+
+## 🔹 Step 1: Configure VirtualBox
+
+1. Power off both VMs.  
+2. Go to **Settings → Network** for each VM:  
+   - **Adapter 1:** NAT (default)  
+   - **Adapter 2:** Host-Only (select `vboxnet0` or default host-only network)  
+3. Start both VMs.
+
+---
+
+## 🔹 Step 2: Verify IP Addresses
+
+### Kali:
+```bash
+ip a
+
+  Sample output:
+eth0: 10.0.2.15/24
+eth1: 192.168.56.102/24
+
+  Windows:
+ipconfig
+  
+Sample output:
+Ethernet adapter VirtualBox Host-Only Network:
+   IPv4 Address . . . . . : 192.168.56.103
+
+     
+     
+🔹 Step 3: Test Connectivity
+Ping Windows from Kali:
+ping -c4 192.168.56.103
+If Windows Firewall blocks ping:
+
+Enable File and Printer Sharing (Echo Request – ICMPv4-In) in Windows Firewall
+
+Or temporarily disable the firewall:
+
+netsh advfirewall set allprofiles state off
+
+
+  
+🔹 Step 4: Test Internet
+From Kali (via NAT):
+ping -c4 8.8.8.8
+ping -c4 google.com
+
+
+  
+🔹 Step 5: Verify Exploitation Network
+Scan Windows with Nmap from Kali:
+nmap -sV 192.168.56.103
+If Windows Firewall is off, this will reveal open ports (SMB, RDP, etc.) for exploitation.
+
+🔹 Network Diagram
+
+         🌍 Internet
+             │
+        [VirtualBox NAT]
+             │
+ ┌────────────┴─────────────┐
+ │                         │
+Kali (10.0.2.15)      Windows (10.0.2.15)
+   eth0 NAT               eth0 NAT
+   eth1 Host-Only         eth1 Host-Only
+192.168.56.102  <---->  192.168.56.103
+       ↕
+ Exploitation Lab (Isolated)
