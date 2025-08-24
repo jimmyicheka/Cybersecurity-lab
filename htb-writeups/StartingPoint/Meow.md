@@ -4,7 +4,7 @@
 - **Name:** Meow  
 - **Difficulty:** Very Easy (Starting Point)  
 - **IP Address:** 10.x.x.x (changes when you spawn the machine)  
-- **Date Completed:** YYYY-MM-DD  
+- **Date Completed:** 2025-08-24  
 
 ---
 
