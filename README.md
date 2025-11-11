@@ -7,26 +7,27 @@ Welcome! I'm Jim, a cybersecurity enthusiast passionate about Linux, ethical hac
 - Master Linux fundamentals and system administration
 - Solve CTFs and labs from Hack The Box and OverTheWire
 - Document writeups and lessons from each lab
-- Build small tools, automation scripts, and recon utilities
-- Land a remote cybersecurity role and grow continuously 
-
-## 🔧 Tools & Skills
-- Bash, Nmap, Netcat, Wireshark
-- Kali Linux, Debian, systemd, permissions
-- Capture The Flag (CTF) solving and writeups
-- Git & GitHub for version control
-- GRC frameworks (via training & certifications)
+- Build and document hacking tools and automation scripts  
+- Continuously grow into a professional cybersecurity role  
 
 ## 📁 Folder Structure
 /linux-fundamentals.md → Tips, command usage & tricks  
 /htb-writeups/ → Hack The Box walkthroughs  
 /overthewire/ → Bandit and other CTF levels  
-/bash-scripts/ → Scripts like Nmap automation or permission fixers  
+/tools/ → Hacking tools
 
-## 📁 Linux Fundamentals
 
-- [Linux Hacks & Commands](linux-fundamentals/linux-hacks.md)
-- [System Info & Enumeration](linux-fundamentals/system-info.md)
+## 🧰 Python Hacking Tools
+
+This new section showcases my practical cybersecurity tools built in Python — each one focuses on automating or demonstrating a core security concept like network spoofing, scanning, or encryption.
+
+📂 **Folder:** [`/tools`](./tools)
+
+### Featured Tools
+- **mac_changer** → Educational MAC address changer for Linux interfaces
+- *(More tools coming soon — network scanner, port sniffer, and encryption utilities)*
+
+Each tool is self-contained with its own README and usage guide. All are built for learning and ethical hacking practice only.
 
 
 Stay tuned for regular updates as I learn, break, and build my way into the cybersecurity field 💻🔒
