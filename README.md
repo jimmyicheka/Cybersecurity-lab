@@ -1,7 +1,7 @@
 
 # 🛡️ Cybersecurity Labs
 
-Welcome! I'm Jim, a cybersecurity enthusiast passionate about Linux, ethical hacking, and real-world security challenges. This repository documents my learning journey, projects, and writeups from platforms like Hack The Box, OverTheWire, and more.
+Welcome! I'm Jim, a cybersecurity enthusiast passionate about Linux, ethical hacking, and real-world security challenges. This repository documents my learning journey, projects, and writeups from platforms like Hack The Box, OverTheWire, and lastly hacking tools i will be building.
 
 ## 🚀 Goals
 - Master Linux fundamentals and system administration
