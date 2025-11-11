@@ -19,7 +19,7 @@ Welcome! I'm Jim, a cybersecurity enthusiast passionate about Linux, ethical hac
 
 ## 🧰 Python Hacking Tools
 
-This new section showcases my practical cybersecurity tools built in Python — each one focuses on automating or demonstrating a core security concept like network spoofing, scanning, or encryption.
+This section showcases practical cybersecurity tools built in Python by me — each one focuses on automating or demonstrating a core security concept like network spoofing, scanning, or encryption.
 
 📂 **Folder:** [`/tools`](./tools)
 
