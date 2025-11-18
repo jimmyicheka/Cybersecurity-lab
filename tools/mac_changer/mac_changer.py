@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
 import subprocess
-import optparse
+import argparse
 import re
 
 def get_arguments():
-    parser = optparse.OptionParser()
-    parser.add_option("-i", "--interface", dest="interface", help="Interface to change its MAC address")
-    parser.add_option("-m", "--mac", dest="new_mac", help="New MAC address")
-    (options, arguments) = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--interface", dest="interface", help="Interface to change its MAC address")
+    parser.add_argument("-m", "--mac", dest="new_mac", help="New MAC address")
+    options = parser.parse_args()
     if not options.interface:
         parser.error("[-] Please specify an interface, use --help for more info.")
     elif not options.new_mac:
@@ -32,14 +32,14 @@ def get_current_mac(interface):
         print("[-] Could not read MAC address.")
 
 
-options = get_arguments()
-current_mac = get_current_mac(options.interface)
+option = get_arguments()
+current_mac = get_current_mac(option.interface)
 print("Current MAC= " + str(current_mac))
 
-change_mac(options.interface, options.new_mac)
+change_mac(option.interface, option.new_mac)
 
-current_mac = get_current_mac(options.interface)
-if current_mac == options.new_mac:
+current_mac = get_current_mac(option.interface)
+if current_mac == option.new_mac:
     print("[+] MAC address was successfully changed to " + current_mac)
 else:
     print("[-] MAC address did not get changed.")
