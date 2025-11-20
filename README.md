@@ -26,6 +26,7 @@ This section showcases practical cybersecurity tools built in Python by me — e
 ### Featured Tools
 - **mac_changer** → Educational MAC address changer for Linux interfaces
 - **network_scanner** → Educational Network ARP scanner for Linux interfaces
+- **arp_spoofer** → Educational ARP poisoner for On Path lab attacks only
 - *(More tools coming soon — port sniffer, and encryption utilities)*
 
 Each tool is self-contained with its own README and usage guide. All are built for learning and ethical hacking practice only.
